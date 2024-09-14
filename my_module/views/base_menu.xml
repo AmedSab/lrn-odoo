@@ -1,0 +1,18 @@
+<odoo>
+    <menuitem
+        id="my_module_root_menu"
+        name="My Module"
+    />
+
+    <menuitem
+        id="my_models_menu"
+        name="My Model"
+        parent="my_module_root_menu"
+    />
+
+    <menuitem
+        id="configration_menu"
+        name="Configration"
+        parent="my_module_root_menu"
+    />
+</odoo>

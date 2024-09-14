@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+my_module.access_my_model,access_my_model,my_module.model_my_model,base.group_user,1,1,1,1
+my_module.access_my_second_model,access_my_second_model,my_module.model_my_second_model,base.group_user,1,1,1,1
+my_module.access_my_model_line,access_my_model_line,my_module.model_my_model_line,base.group_user,1,1,1,1

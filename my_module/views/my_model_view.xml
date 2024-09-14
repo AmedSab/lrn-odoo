@@ -1,0 +1,131 @@
+<odoo>
+
+    <record id="view_my_model_tree" model="ir.ui.view">
+        <field name="name">my model tree</field>
+        <field name="model">my_model</field>
+        <field name="arch" type="xml">
+            <tree multi_edit="1" create="1" delete="1" edit="1" class="header_custom"> <!--decoration-danger="(is_late)"-->
+                <field name="ref"/>
+                <field name="f_name"/>
+                <field name="date_field"/>
+                <field name="price"/>
+                <field name="price2"/>
+                <field name="diff_price"/>
+                <field name="expected_done_date"/>
+                <field name="is_late"/>
+                <field name="bool"/>
+                <field name="state"/>
+                <field name="my_second_model_id"/>
+                <field name="my_second_model_name"/>
+                <field name="my_second_model_phone"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_my_model_form" model="ir.ui.view">
+        <field name="name">my.model.form</field>
+        <field name="model">my_model</field>
+        <field name="arch" type="xml">
+            <form string="Example Form">
+                <sheet>
+                    <header>
+                        <button name="action_draft" type="object" class="btn-primary" string="Set ot draft"/>
+<!--                        <button name="action_pending" type="object" class="btn-primary" string="Set ot pending" attrs="{'invisible': [('state', '=', 'pending')]}"/>-->
+<!--                        <button name="action_done" type="object" class="btn-primary" string="Set ot draft" invisible="state == 'done'"/>-->
+
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <div class="oe_title">
+                        <lable for="f_name"/>
+                        <br/>
+                        <h1>
+                            <field name="ref"/>
+                        </h1>
+                        <h3>
+                            <field name="f_name"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <field name="date_field"/>
+                        <field name="price"/>
+                        <field name="price2"/>
+                        <field name="diff_price"/>
+                        <field name="expected_done_date"/>
+                        <field name="is_late"/>
+                        <field name="bool"/><field name="my_second_model_id"/>
+                        <field name="my_second_model_name"/>
+                        <field name="my_second_model_phone"/>
+                        <field name="active"/>
+                    </group>
+                    <notebook>
+                        <page string="Line">
+<!--                            <field name="my_model_line_ids"/>-->
+                            <field name="my_model_line_ids">
+<!--                                <tree>-->
+<!--                                    <field name="area"/>-->
+<!--                                    <field name="vol"/>-->
+<!--                                </tree>-->
+                                <tree editable="bottom">
+                                    <field name="area"/>
+                                    <field name="vol"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_my_model_search" model="ir.ui.view">
+        <field name="name">my model search</field>
+        <field name="model">my_model</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="f_name"/>
+                <filter name="is_bool" string="Is bool" domain="[('bool','=','True')]"/>
+                <filter name="group_bool " string="Bool" context="{'group_by': 'bool'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="my_model_action" model="ir.actions.act_window">
+        <field name="name">my model action</field>
+        <field name="res_model">my_model</field>
+        <field name="view_mode">tree,form,search</field>
+    </record>
+
+    <record id="my_model_done_server_action" model="ir.actions.server">
+        <field name="name">my model done server action</field>
+        <field name="model_id" ref="model_my_model"/>
+        <field name="binding_model_id" ref="model_my_model"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.action_done()
+        </field>
+    </record>
+
+    <record id="check_done_date_cron" model="ir.cron">
+        <field name="name">My Model: Checking expected done date</field>
+        <field name="model_id" ref="model_my_model"/>
+        <field name="state">code</field>
+        <field name="code">model.check_expected_done_date()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active">True</field>
+    </record>
+
+    <menuitem
+        id="my_model_item"
+        name="My_Model"
+        parent="my_models_menu"
+        action="my_model_action"
+    />
+</odoo>
