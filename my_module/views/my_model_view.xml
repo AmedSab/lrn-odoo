@@ -60,12 +60,7 @@
                     </group>
                     <notebook>
                         <page string="Line">
-<!--                            <field name="my_model_line_ids"/>-->
                             <field name="my_model_line_ids">
-<!--                                <tree>-->
-<!--                                    <field name="area"/>-->
-<!--                                    <field name="vol"/>-->
-<!--                                </tree>-->
                                 <tree editable="bottom">
                                     <field name="area"/>
                                     <field name="vol"/>

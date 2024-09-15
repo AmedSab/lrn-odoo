@@ -85,8 +85,6 @@ class MyModel(models.Model):
 
 
 
-
-
 class MyModelLine(models.Model):
     _name = "my_model_line"
     _description = 'my model line'
